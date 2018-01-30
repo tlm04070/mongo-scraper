@@ -1,4 +1,5 @@
-<h1 class="text-center">Articles: </h1>
+<h1 class="text-center">
+    Articles: </h1>
 <div class="articleList">
     {{#each article}}
     <div class="row">
@@ -13,11 +14,41 @@
         </a>
         <br>
         <div class="text-center">
-            <button class="btn note-btn">
+            <button id="{{this.id}}" class="btn note-btn" type="button" data-toggle="modal" data-target="#articleNotes">
                 Make a note
             </button>
         </div>
         <br>
     </div>
-    <hr> {{/each}}
+    <hr>
+    <div class="modal fade" id="note" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add a note about the article here: </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="comment">Comment:</label>
+                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="submit" type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="added" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Your note was successfully added!</h4>
+                </div>
+            </div>
+        </div>
+    </div> {{/each}}
 </div>

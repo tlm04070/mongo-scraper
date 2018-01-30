@@ -27,7 +27,7 @@ app.get("/scrape", function(req, res) {
   });
 });
 
-app.get("/all", function(req, res) {
+app.get("/", function(req, res) {
   db.Article.find({}).then(function(data) {
     const hbsObject = {
       article: data
@@ -37,4 +37,7 @@ app.get("/all", function(req, res) {
   });
 });
 
+// app.get("/new", function(req, res){
+//   db.Article.updateOne({})
+// })
 module.exports = app;
