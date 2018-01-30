@@ -13,16 +13,18 @@ mongoose.Promise = Promise;
 mongoose.connect("mongodb://localhost/mongoScraper");
 
 app.get("/scrape", function(req, res) {
-  axios.get("https://www.reddit.com/r/news").then(function(response) {
-    let results = {};
-    var $ = cheerio.load(response.data);
-    $("p.title").each(function(i, element) {
-      results.headline = $(element).text();
-      results.summary = $(element).text();
-      results.URL = $(element)
-        .children("a")
-        .attr("href");
-      db.Article.create(results);
+  db.Article.remove({}).then(function() {
+    axios.get("https://www.reddit.com/r/news").then(function(response) {
+      let results = {};
+      var $ = cheerio.load(response.data);
+      $("p.title").each(function(i, element) {
+        results.headline = $(element).text();
+        results.summary = $(element).text();
+        results.URL = $(element)
+          .children("a")
+          .attr("href");
+        db.Article.create(results);
+      });
     });
   });
 });
