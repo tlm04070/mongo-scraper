@@ -1,0 +1,23 @@
+<h1 class="text-center">Articles: </h1>
+<div class="articleList">
+    {{#each article}}
+    <div class="row">
+        <h3 class="col-lg-8 text-center">{{this.headline}}</h3>
+        <a href="{{this.URL}}" target="_blank" style="text-decoration: none" class="linktext text-center">
+            <br>
+            <div>
+                <button data-articleid="{{this.id}}" class="btn btn-lg">
+                    Go to article
+                </button>
+            </div>
+        </a>
+        <br>
+        <div class="text-center">
+            <button class="btn note-btn">
+                Make a note
+            </button>
+        </div>
+        <br>
+    </div>
+    <hr> {{/each}}
+</div>

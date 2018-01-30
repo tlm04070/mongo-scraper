@@ -1,0 +1,55 @@
+.articleList {
+  background-color: rgba(242, 239, 233, 0.85);
+  border-radius: 7px;
+}
+
+h1 {
+  color: black;
+  font-family: "Playfair Display SC", serif;
+  text-decoration: underline;
+  font-size: 500%;
+  text-shadow: 4px 3px 0px #ffef, 9px 8px 0px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2%;
+}
+
+h3 {
+  padding: 2%;
+  font-family: "News Cycle", sans-serif;
+}
+
+.linktext {
+  color: #efefef;
+}
+
+.linktext:hover {
+  color: #efefef;
+  text-decoration: none;
+}
+
+/* .row {
+  border-bottom: 2px solid;
+  margin-top: 1%;
+} */
+hr {
+  border-bottom: 2px solid;
+  margin-top: 1%;
+}
+.btn-lg {
+  display: inline;
+  background-color: darkred;
+}
+.note-btn {
+  background-color: black;
+  color: #efefef;
+}
+body {
+  background-color: rgba(86, 78, 88, 0.4);
+}
+
+html {
+  background: url(../images/articles.jpeg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

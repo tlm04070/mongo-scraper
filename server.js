@@ -1,19 +1,24 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const request = require("request");
-const mongoose = require("mongoose");
-const cheerio = require("cheerio");
-const axios = require("axios");
+const exphbs = require("express-handlebars");
 
-const app = express();
-
-const db = require("./models");
+var app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/mongoScraper");
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+// var orm = require("./config/orm.js");
+var routes = require("./controllers/articleController.js");
+// Console log all the party_name's.
+
+app.use("/", routes);
+
+app.listen(3000, function() {
+  console.log("App listening on port 3000");
+});
 
 // db.Article.create(
 //   {
@@ -30,20 +35,6 @@ mongoose.connect("mongodb://localhost/mongoScraper");
 //     }
 //   }
 // );
-app.get("/scrape", function(req, res) {
-  axios.get("https://www.reddit.com/r/news").then(function(response) {
-    let results = {};
-    var $ = cheerio.load(response.data);
-    $("p.title").each(function(i, element) {
-      results.headline = $(element).text();
-      results.summary = $(element).text();
-      results.URL = $(element)
-        .children()
-        .attr("href");
-      db.Article.create(results);
-    });
-  });
-});
 
 // app.get("/scrape", function(req, res) {
 //   // First, we grab the body of the html with request
@@ -75,7 +66,3 @@ app.get("/scrape", function(req, res) {
 //     });
 //   });
 // });
-
-app.listen(3000, function() {
-  console.log("App listening on port 3000");
-});
