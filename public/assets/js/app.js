@@ -4,6 +4,18 @@ $(document).ready(function() {
   });
 
   $("#submit").on("click", function(event) {
+    let thisId = $(this).attr("data-id");
+    console.log(thisId);
+    console.log($("#bodyinput").val());
+    $.ajax({
+      method: "POST",
+      url: "/articles/" + thisId,
+      data: {
+        body: $("#bodyinput").val()
+      }
+    }).done(function(data) {
+      console.log(data);
+    });
     $("#added").modal("toggle");
   });
 
