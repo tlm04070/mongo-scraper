@@ -13,7 +13,7 @@ mongoose.Promise = Promise;
 mongoose.connect("mongodb://localhost/mongoScraper");
 
 app.get("/scrape", function(req, res) {
-  db.Article.remove({}).then(function() {
+  db.Article.remove({}).then(function(data) {
     axios.get("https://www.reddit.com/r/news").then(function(response) {
       let results = {};
       var $ = cheerio.load(response.data);
@@ -39,6 +39,11 @@ app.get("/", function(req, res) {
   });
 });
 
+app.get("/empty", function(req, res) {
+  db.Article.remove({}).then(function() {
+    res.redirect("/");
+  });
+});
 // app.get("/new", function(req, res){
 //   db.Article.updateOne({})
 // })
