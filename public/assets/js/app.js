@@ -8,8 +8,14 @@ $(document).ready(function() {
   });
 
   $("#scrapebtn").on("click", function(event) {
-    event.preventDefault();
-    console.log("clicked");
+    // event.preventDefault();
+    console.log("clicked amelies");
+    // $.ajax({
+    //   method: "GET",
+    //   url: "/scrape"
+    // }).then(function(response) {
+    //   console.log(response);
+    // });
     window.location.replace("/scrape");
     console.log("scraping");
     setTimeout(function() {
@@ -18,7 +24,6 @@ $(document).ready(function() {
   });
 
   $("#homebtn").on("click", function(event) {
-    event.preventDefault();
     window.location.replace("/empty");
   });
 });

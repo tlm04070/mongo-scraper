@@ -44,6 +44,21 @@ app.get("/empty", function(req, res) {
     res.redirect("/");
   });
 });
+
+app.put("/save/:id", function(req, res) {
+  db.Article.updateOne({ _id: req.params.id }).then(function(data) {
+    console.log(data);
+  });
+});
+
+app.get("/savedList", function(req, res) {
+  db.Article.find({ saved: true }).then(function(data) {
+    const hbsObject = {
+      article: data
+    };
+    res.render("index", hbsObject);
+  });
+});
 // app.get("/new", function(req, res){
 //   db.Article.updateOne({})
 // })

@@ -37,8 +37,10 @@ hr {
 .btn-lg {
   display: inline;
   background-color: darkred;
+  color: white;
 }
-.note-btn {
+.note-btn,
+.view-btn {
   background-color: black;
   color: #efefef;
 }
@@ -62,4 +64,8 @@ textarea {
 #homebtn {
   color: white;
   margin: 0 3% 0 3%;
+}
+
+.btn {
+  margin: 1% 6% 1% 6%;
 }

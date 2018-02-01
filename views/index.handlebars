@@ -1,23 +1,23 @@
 <h1 class="text-center">Articles: </h1>
 <div class="articleList">
     {{#each article}}
-    <div class="row">
-        <h3 class="col-lg-8 text-center">{{this.headline}}</h3>
+    <div class="row text-center">
+        <h3>{{this.headline}}</h3>
+    </div>
+    <div class="row text-center">
         <a href="{{this.URL}}" target="_blank" style="text-decoration: none" class="linktext text-center">
-            <br>
-            <div>
-                <button data-articleid="{{this.id}}" class="btn btn-lg">
-                    Go to article
-                </button>
-            </div>
-        </a>
-        <br>
-        <div class="text-center">
-            <button id="{{this.id}}" class="btn note-btn" type="button" data-toggle="modal" data-target="#articleNotes">
-                Make a note
+
+            <button data-articleid="{{this.id}}" class="btn btn-lg">
+                Go to article
             </button>
-        </div>
-        <br>
+        </a>
+        <button class="btn btn-lg" data-articleid="{{this.id}}">Save Article</button>
+    </div>
+    <div class="row text-center">
+        <button data-articleid="{{this.id}}" class="btn note-btn btn-lg" type="button" data-toggle="modal" data-target="#articleNotes">
+            Make a note
+        </button>
+        <button class="btn view-btn btn-lg" data-articleid="{{this.id}}">View notes</button>
     </div>
     <hr>
     <div class="modal fade" id="note" role="dialog">
