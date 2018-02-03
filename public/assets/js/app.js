@@ -8,6 +8,10 @@ $(document).ready(function() {
     //$(this).modal("toggle");
   });
 
+  $("#savedbtn").on("click", function() {
+    window.location.replace("/savedList");
+  });
+
   $(".submit").on("click", function(event) {
     var thisId = $(this).attr("data-id");
     console.log(thisId);
