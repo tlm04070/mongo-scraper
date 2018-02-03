@@ -1,17 +1,27 @@
 $(document).ready(function() {
   $(".note-btn").click(function() {
-    $("#note").modal("toggle");
+    $(this)
+      .closest("div")
+      .find(".modal")
+      .modal("toggle");
+
+    //$(this).modal("toggle");
   });
 
-  $("#submit").on("click", function(event) {
-    let thisId = $(this).attr("data-id");
+  $(".submit").on("click", function(event) {
+    var thisId = $(this).attr("data-id");
     console.log(thisId);
-    console.log($("#bodyinput").val());
+    var message = $(this)
+      .closest("div")
+      .parent()
+      .find("textarea")
+      .val();
+
     $.ajax({
       method: "POST",
       url: "/articles/" + thisId,
       data: {
-        body: $("#bodyinput").val()
+        body: message
       }
     }).done(function(data) {
       console.log(data);
@@ -37,5 +47,20 @@ $(document).ready(function() {
 
   $("#homebtn").on("click", function(event) {
     window.location.replace("/empty");
+  });
+
+  $(".save").on("click", function() {
+    console.log("clicked");
+    let thisId = $(this).attr("data-articleid");
+    console.log(thisId);
+    $.ajax({
+      method: "PUT",
+      url: "/save/" + thisId,
+      data: {
+        saved: true
+      }
+    }).done(function(data) {
+      console.log(data);
+    });
   });
 });

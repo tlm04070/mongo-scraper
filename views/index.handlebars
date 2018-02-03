@@ -4,50 +4,50 @@
     <div class="row text-center">
         <h3>{{this.headline}}</h3>
     </div>
-    <div class="row text-center">
+    <div class="row text-center" data-articleid="{{this.id}}">
         <a href="{{this.URL}}" target="_blank" style="text-decoration: none" class="linktext text-center">
 
             <button data-articleid="{{this.id}}" class="btn btn-lg">
                 Go to article
             </button>
         </a>
-        <button class="btn btn-lg" data-articleid="{{this.id}}">Save Article</button>
+        <button class="btn btn-lg save" data-articleid="{{this.id}}">Save Article</button>
     </div>
     <div class="row text-center">
         <button data-articleid="{{this.id}}" class="btn note-btn btn-lg" type="button" data-toggle="modal" data-target="#articleNotes">
             Make a note
         </button>
-        <button class="btn view-btn btn-lg" data-articleid="{{this.id}}">View notes</button>
-    </div>
-    <hr>
-    <div class="modal fade" id="note" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Add a note about the article here: </h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="bodyinput">Comment:</label>
-                        <textarea class="form-control" rows="5" id="bodyinput"></textarea>
+        <div class="modal fade note" id="note" role="dialog" data-id="{{this.id}}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add a note about the article here: </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="bodyinput">Comment:</label>
+                            <textarea class="form-control" rows="5" id="bodyinput"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="submit" type="button" class="btn btn-default submit" data-dismiss="modal" data-id="{{this.id}}">Submit</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button id="submit" type="button" class="btn btn-default" data-dismiss="modal" data-id="{{this.id}}">Submit</button>
-                </div>
-            </div>
 
+            </div>
         </div>
-    </div>
-    <div class="modal fade" id="added" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Your note was successfully added!</h4>
+        <div class="modal fade" id="added" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Your note was successfully added!</h4>
+                    </div>
                 </div>
             </div>
         </div>
-    </div> {{/each}}
+        <button class="btn view-btn btn-lg" data-articleid="{{this.id}}">View notes</button>
+    </div>
+    <hr> {{/each}}
 </div>

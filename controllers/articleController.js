@@ -46,8 +46,12 @@ app.get("/empty", function(req, res) {
 });
 
 app.put("/save/:id", function(req, res) {
-  db.Article.updateOne({ _id: req.params.id }).then(function(data) {
-    console.log(data);
+  db.Article.updateOne(
+    { _id: req.params.id },
+    { saved: true },
+    { new: true }
+  ).then(function(data) {
+    res.json(data);
   });
 });
 
@@ -62,4 +66,19 @@ app.get("/savedList", function(req, res) {
 // app.get("/new", function(req, res){
 //   db.Article.updateOne({})
 // })
+
+app.post("/articles/:id", function(req, res) {
+  db.Note.create(req.body)
+    .then(function(dbNote) {
+      res.json(dbNote);
+      return db.Article.findOneAndUpdate(
+        { _id: req.params.id },
+        { $set: { note: dbNote.body } },
+        { new: true }
+      );
+    })
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    });
+});
 module.exports = app;
