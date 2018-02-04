@@ -10,7 +10,9 @@ const app = express();
 const db = require("../models");
 
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/mongoScraper");
+mongoose.connect(
+  "mongodb://tlm04070:Tarheels@ds119250.mlab.com:19250/mongoscraper"
+);
 
 app.get("/scrape", function(req, res) {
   db.Article.remove({}).then(function(data) {
@@ -47,16 +49,24 @@ app.get("/empty", function(req, res) {
 
 app.put("/save/:id", function(req, res) {
   db.Article.updateOne(
-    { _id: req.params.id },
-    { saved: true },
-    { new: true }
+    {
+      _id: req.params.id
+    },
+    {
+      saved: true
+    },
+    {
+      new: true
+    }
   ).then(function(data) {
     res.json(data);
   });
 });
 
 app.get("/savedList", function(req, res) {
-  db.Article.find({ saved: true }).then(function(data) {
+  db.Article.find({
+    saved: true
+  }).then(function(data) {
     const hbsObject = {
       article: data
     };
@@ -72,9 +82,17 @@ app.post("/articles/:id", function(req, res) {
     .then(function(dbNote) {
       res.json(dbNote);
       return db.Article.findOneAndUpdate(
-        { _id: req.params.id },
-        { $set: { note: dbNote.body } },
-        { new: true }
+        {
+          _id: req.params.id
+        },
+        {
+          $set: {
+            note: dbNote.body
+          }
+        },
+        {
+          new: true
+        }
       );
     })
     .then(function(dbArticle) {
