@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
-
+var PORT = process.env.PORT || 3005;
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,8 +16,8 @@ var routes = require("./controllers/articleController.js");
 
 app.use("/", routes);
 
-app.listen(3000, function() {
-  console.log("App listening on port 3000");
+app.listen(PORT, function() {
+  console.log("App listening on port 3005");
 });
 
 // db.Article.create(
