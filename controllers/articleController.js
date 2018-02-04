@@ -78,16 +78,16 @@ app.get("/savedList", function(req, res) {
 // })
 
 app.post("/articles/:id", async function(req, res) {
-  db.Note.create(req.body)
-    .then(function(dbNote) {
-      db.Article.findOneAndUpdate(
-        { _id: req.params.id },
-        { $set: { note: dbNote.body } },
-        { new: true }
-      );
-    })
-    .then(function(dbArticle) {
-      return res.json(dbArticle);
-    });
+  try {
+    const dbNote = await db.Note.create(req.body);
+    const dbArticle = await db.Article.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: { note: dbNote.body } },
+      { new: true }
+    );
+    res.json({ dbNote, dbArticle });
+  } catch (err) {
+    res.json({ err });
+  }
 });
 module.exports = app;
