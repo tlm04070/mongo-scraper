@@ -37,13 +37,13 @@ app.get("/", function(req, res) {
       article: data
     };
     console.log(hbsObject);
-    res.render("index", hbsObject);
+    return res.render("index", hbsObject);
   });
 });
 
 app.get("/empty", function(req, res) {
   db.Article.remove({}).then(function() {
-    res.redirect("/");
+    return res.redirect("/");
   });
 });
 
@@ -59,7 +59,7 @@ app.put("/save/:id", function(req, res) {
       new: true
     }
   ).then(function(data) {
-    res.json(data);
+    return res.json(data);
   });
 });
 
@@ -70,33 +70,24 @@ app.get("/savedList", function(req, res) {
     const hbsObject = {
       article: data
     };
-    res.render("index", hbsObject);
+    return res.render("index", hbsObject);
   });
 });
 // app.get("/new", function(req, res){
 //   db.Article.updateOne({})
 // })
 
-app.post("/articles/:id", function(req, res) {
+app.post("/articles/:id", async function(req, res) {
   db.Note.create(req.body)
     .then(function(dbNote) {
-      res.json(dbNote);
-      return db.Article.findOneAndUpdate(
-        {
-          _id: req.params.id
-        },
-        {
-          $set: {
-            note: dbNote.body
-          }
-        },
-        {
-          new: true
-        }
+      db.Article.findOneAndUpdate(
+        { _id: req.params.id },
+        { $set: { note: dbNote.body } },
+        { new: true }
       );
     })
     .then(function(dbArticle) {
-      res.json(dbArticle);
+      return res.json(dbArticle);
     });
 });
 module.exports = app;
